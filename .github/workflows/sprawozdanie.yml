@@ -8,6 +8,6 @@ jobs:
       - run: pip install ipykernel nbconvert pint open-atmos-jupyter-utils scipy
       - uses: actions/checkout@v4
       - run: python -m nbconvert --to pdf --execute pint_and_boiling_point.ipynb
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4 #zapisywanie pdf na dłużej niz jednorazowo 
         with:
-          path: pint_and_boiling_point.pdf
+          path: pint_and_boiling_point.pdf #nazwa pliku który chcemy żeby przetrwał 
