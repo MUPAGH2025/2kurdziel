@@ -7,7 +7,7 @@ jobs:
       - run: sudo apt-get install inkscape pandoc texlive-xetex
       - run: pip install ipykernel nbconvert pint open-atmos-jupyter-utils scipy
       - uses: actions/checkout@v4
-      - run: python -m nbconvert --to pdf --execute pint_and_boiling_point.ipynb
+      - run: python -m nbconvert --to pdf --execute lab1.ipynb
       - uses: actions/upload-artifact@v4 #zapisywanie pdf na dłużej niz jednorazowo 
         with:
-          path: pint_and_boiling_point.pdf #nazwa pliku który chcemy żeby przetrwał 
+          path: lab1.pdf #nazwa pliku który chcemy żeby przetrwał 
