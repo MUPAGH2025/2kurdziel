@@ -8,3 +8,6 @@ jobs:
       - run: pip install ipykernel nbconvert pint open-atmos-jupyter-utils scipy
       - uses: actions/checkout@v4
       - run: python -m nbconvert --to pdf --execute pint_and_boiling_point.ipynb
+      - uses: actions/upload-artifact@v4
+        with:
+          path: pint_and_boiling_point.pdf
