@@ -4,10 +4,10 @@ jobs:
   pdf:
     runs-on: ubuntu-22.04
     steps:
-      - run: sudo apt-get install inkscape pandoc texlive-xetex
+      # - run: sudo apt-get install inkscape pandoc texlive-xetex  #potrzebne by wykonać pdf
       - run: pip install ipykernel nbconvert pint open-atmos-jupyter-utils scipy
       - uses: actions/checkout@v4
-      - run: python -m nbconvert --to pdf --execute "mpdata_2d_numpy_only(6).ipynb"
+      - run: python -m nbconvert --to script --execute "mpdata_2d_numpy_only(6).ipynb"  # zamiast to pdf  można np. to script
       - uses: actions/upload-artifact@v4 #zapisywanie pdf na dłużej niz jednorazowo 
         with:
           path: anim.gif #nazwa pliku który chcemy żeby przetrwał 
