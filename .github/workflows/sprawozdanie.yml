@@ -7,7 +7,7 @@ jobs:
       - run: sudo apt-get install inkscape pandoc texlive-xetex
       - run: pip install ipykernel nbconvert pint open-atmos-jupyter-utils scipy
       - uses: actions/checkout@v4
-      - run: python -m nbconvert --to pdf --execute mpdata_2d_numpy_only(6).ipynb
+      - run: python -m nbconvert --to pdf --execute "mpdata_2d_numpy_only(6).ipynb"
       - uses: actions/upload-artifact@v4 #zapisywanie pdf na dłużej niz jednorazowo 
         with:
-          path: mpdata_2d_numpy_only(6).pdf #nazwa pliku który chcemy żeby przetrwał 
+          path: anim.gif #nazwa pliku który chcemy żeby przetrwał 
