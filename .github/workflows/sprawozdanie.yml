@@ -7,7 +7,7 @@ jobs:
       - run: sudo apt-get install inkscape pandoc texlive-xetex  #potrzebne by wykonać pdf
       - run: pip install ipykernel nbconvert pint open-atmos-jupyter-utils scipy numby matplotlib PyMPDATA
       - uses: actions/checkout@v4
-      - run: python -m nbconvert --to pdf --execute "rip_currents_end.ipynb"  # zamiast to pdf  można np. to script
+      - run: python -m nbconvert --to pdf --execute "project/rip_currents_end.ipynb"  # zamiast to pdf  można np. to script
       - uses: actions/upload-artifact@v4 #zapisywanie pdf na dłużej niz jednorazowo 
         with:
           path: rip_currents.pdf #nazwa pliku który chcemy żeby przetrwał 
