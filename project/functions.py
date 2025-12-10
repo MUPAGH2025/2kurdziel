@@ -4,20 +4,14 @@ from open_atmos_jupyter_utils import show_plot, show_anim
 from PyMPDATA import ScalarField, Solver, Stepper, VectorField, Options, boundary_conditions
 from PyMPDATA.boundary_conditions import Extrapolated
 from matplotlib.colors import LinearSegmentedColormap
-colors = [
-    (0.00, 0.30, 0.60),  # deep ocean  
-    (0.70, 0.90, 1.00),  # shallow water 
-    (0.95, 0.85, 0.60),  # beach sand 
-]
-beach_cmap = LinearSegmentedColormap.from_list("beach", colors)
+
 colors2 = [
     (0.95, 0.85, 0.60),  # beach sand 
     (0.70, 0.90, 1.00),  # shallow water 
-
     (0.00, 0.30, 0.60),  # deep ocean  
     
 ]
-beach_cmap2 = LinearSegmentedColormap.from_list("beach", colors2)
+beach_cmap = LinearSegmentedColormap.from_list("beach", colors2)
 
 def plot_both(frame, *, zlim=(-0.25, 0.25),output,bathymetry):
     psi = output['h'][frame] - bathymetry
