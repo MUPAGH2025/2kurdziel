@@ -10,54 +10,35 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-    # --- 1. Pobieranie repo ---
     - name: Checkout repository
       uses: actions/checkout@v4
-
-
-    # --- 2. Instalacja Pythona + bibliotek ---
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: "3.10"
-
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install jupyter nbconvert matplotlib numpy PyMPDATA
+        pip install open-atmos-jupyter-utils
 
-
-    # --- 3. Uruchomienie notebooka ---
     - name: Run simulation notebook
       run: |
         jupyter nbconvert --execute project/beach_slope.ipynb \
           --to notebook --output executed_beach_slope.ipynb
-
-
-    # --- 4. Instalacja TeX Live ---
     - name: Install TeXLive
       run: |
         sudo apt-get update
         sudo apt-get install -y texlive-full
-
-
-    # --- 5. Kompilacja LaTeX → PDF ---
     - name: Compile LaTeX report
       run: |
         pdflatex -interaction=nonstopmode -halt-on-error sprawozdanie.tex
         pdflatex -interaction=nonstopmode -halt-on-error sprawozdanie.tex
-
-
-    # --- 6. Upload PDF ---
     - name: Upload PDF artifact
       uses: actions/upload-artifact@v4
       with:
         name: sprawozdanie
         path: sprawozdanie.pdf
-
-
-    # --- 7. Upload results (SVG, dane, itd.) ---
     - name: Upload simulation results
       uses: actions/upload-artifact@v4
       with:
