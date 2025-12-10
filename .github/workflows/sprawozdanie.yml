@@ -12,33 +12,41 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: "3.10"
-    - name: Install dependencies
+
+    - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install jupyter nbconvert matplotlib numpy PyMPDATA
-        pip install open-atmos-jupyter-utils
+        pip install numpy matplotlib PyMPDATA nbconvert
 
-    - name: Run simulation notebook
+    - name: Execute Jupyter Notebook (simulation)
       run: |
         jupyter nbconvert --execute project/beach_slope.ipynb \
           --to notebook --output executed_beach_slope.ipynb
-    - name: Install TeXLive
+
+    - name: Install TeXLive (light version)
       run: |
         sudo apt-get update
-        sudo apt-get install -y texlive-full
+        sudo apt-get install -y \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-fonts-recommended
+
     - name: Compile LaTeX report
       run: |
         pdflatex -interaction=nonstopmode -halt-on-error sprawozdanie.tex
         pdflatex -interaction=nonstopmode -halt-on-error sprawozdanie.tex
+
     - name: Upload PDF artifact
       uses: actions/upload-artifact@v4
       with:
         name: sprawozdanie
         path: sprawozdanie.pdf
+
     - name: Upload simulation results
       uses: actions/upload-artifact@v4
       with:
