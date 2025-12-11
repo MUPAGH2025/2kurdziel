@@ -117,3 +117,35 @@ def save_4_frames(animation_func, *, output=None, bathy=None, name="", n_frames=
         plt.show()
         plt.close(fig)
         print(f"[OK] zapisano {filename}")
+
+def save_4_frames_plot_both(output, bathy, name="surface3d", n_frames=4):
+    """
+    Zapisuje 4 klatki wizualizacji 3D (plot_both) jako SVG.
+    """
+    os.makedirs("frames_svg", exist_ok=True)
+
+    total = len(output["h"])
+    frames = np.linspace(0, total - 1, n_frames, dtype=int)
+
+    print(f"\n=== Generuję {n_frames} klatki dla: {name} ===")
+
+    for i, fr in enumerate(frames):
+        fig = plot_both(fr, output=output, bathymetry=bathy)
+        filename = f"frames_svg/{name}_{i}.svg"
+        fig.savefig(filename, format="svg")
+        plt.show()
+        plt.close(fig)
+        print(f"[OK] zapisano {filename}")
+def save_4_frames_bathymetry(bathy, name="bathymetry", n_frames=1):
+    os.makedirs("frames_svg", exist_ok=True)
+
+    print(f"\n=== Generuję {n_frames} klatki dla: {name} ===")
+
+    for i in range(n_frames):
+        fig = anim_bathymetry(0, bathy=bathy)
+        filename = f"frames_svg/{name}_{i}.svg"
+        fig.savefig(filename, format="svg")
+        plt.show()
+        plt.close(fig)
+        print(f"[OK] zapisano {filename}")
+
